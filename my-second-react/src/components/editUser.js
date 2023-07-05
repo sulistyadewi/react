@@ -1,27 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
-const FormComponent = (props) => {
-  // console.log(props.addUser);
-  const formState = {
-    id: null,
-    name: "",
-    job: "",
-  };
-  const [user, setUser] = useState(formState);
+const EditUser = (props) => {
+  console.log(props, "ini dari editUser");
+  const [user, setUser] = useState(props.selectedUser);
   const handleInputChanged = (event) => {
     const { name, value } = event.target;
     setUser({ ...user, [name]: value });
   };
   // console.log(user.name, "ini form");
+  useEffect(() => {
+    setUser(props.selectedUser);
+  }, [props.selectedUser]);
   return (
     <div className="container mx-auto">
       <div className="">
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            if (!user.name || !user.job) return;
-            props.addUser(user);
-            setUser(formState);
+            props.updateUser(user.id, user);
           }}
           className="flex flex-col justify-start"
         >
@@ -61,4 +57,4 @@ const FormComponent = (props) => {
   );
 };
 
-export default FormComponent;
+export default EditUser;

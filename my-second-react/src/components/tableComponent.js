@@ -19,10 +19,20 @@ const TableComponent = (props) => {
                 <td className="text-center py-4">{user.name}</td>
                 <td className="text-center">{user.job}</td>
                 <td>
-                  <button className="px-8 py-2 bg-green-500 text-white mr-4">
+                  <button
+                    onClick={() => {
+                      props.editUser(user);
+                    }}
+                    className="px-8 py-2 bg-green-500 text-white mr-4"
+                  >
                     Edit
                   </button>
-                  <button className="px-6 py-2 bg-red-500 text-white">
+                  <button
+                    onClick={() => {
+                      props.deleteData(user.id);
+                    }}
+                    className="px-6 py-2 bg-red-500 text-white"
+                  >
                     Delete
                   </button>
                 </td>
