@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from "react";
 
-const EditUser = (props) => {
-  console.log(props, "ini dari editUser");
-  const [user, setUser] = useState(props.selectedUser);
+const EditUser = ({ setEdit, updateUser, selectedUser }) => {
+  // console.log(setEdit, "ini setEdit");
+  // console.log(updateUser, "ini updateUser");
+  console.log(selectedUser, "ini selecteduser");
+  const [user, setUser] = useState(selectedUser);
   const handleInputChanged = (event) => {
     const { name, value } = event.target;
     setUser({ ...user, [name]: value });
   };
   // console.log(user.name, "ini form");
   useEffect(() => {
-    setUser(props.selectedUser);
-  }, [props.selectedUser]);
+    setUser(selectedUser);
+  }, [selectedUser]);
   return (
     <div className="container mx-auto">
       <div className="">
         <form
           onSubmit={(event) => {
             event.preventDefault();
-            props.updateUser(user.id, user);
+            updateUser(user.id, user);
           }}
           className="flex flex-col justify-start"
         >
@@ -46,9 +48,16 @@ const EditUser = (props) => {
           <div className="px-32">
             <button
               type="submit"
+              className="bg-blue-400 w-32 text-white py-2 mt-5 rounded mr-5"
+            >
+              Edit User
+            </button>
+            <button
+              onClick={() => setEdit(false)}
+              type="submit"
               className="bg-blue-400 w-32 text-white py-2 mt-5 rounded"
             >
-              Submit
+              Back
             </button>
           </div>
         </form>
